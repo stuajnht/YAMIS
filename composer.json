@@ -1,0 +1,13 @@
+{
+    "name": "vendor/y-a-m-i-s",
+    "description": "Yet Another Management Information System",
+    "authors": [
+        {
+            "name": "Jonathan Hart",
+            "email": "stuajnht@users.noreply.github.com"
+        }
+    ],
+    "require": {
+        "monolog/monolog": "1.0.*"
+    }
+}
