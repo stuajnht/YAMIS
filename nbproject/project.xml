@@ -5,5 +5,14 @@
         <data xmlns="http://www.netbeans.org/ns/php-project/1">
             <name>YAMIS</name>
         </data>
+        <spellchecker-wordlist xmlns="http://www.netbeans.org/ns/spellchecker-wordlist/1">
+            <word>github</word>
+            <word>http</word>
+            <word>noreply</word>
+            <word>org</word>
+            <word>stuajnht</word>
+            <word>www</word>
+            <word>YAMIS</word>
+        </spellchecker-wordlist>
     </configuration>
 </project>
