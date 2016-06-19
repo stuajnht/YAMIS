@@ -1,4 +1,8 @@
-# Netbeans
+# YAMIS
+# Ignoring locally generated ApiGen development documentation files
+docs/dev/
+
+# NetBeans
 # https://github.com/github/gitignore/blob/master/Global/NetBeans.gitignore
 nbproject/private/
 build/
