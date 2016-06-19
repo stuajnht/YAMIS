@@ -17,10 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-echo '../vendor';
-print_r(scandir('../vendor'));
-echo '../../vendor';
-print_r(scandir('../../vendor'));
+echo '/home/travis/build/stuajnht/YAMIS';
+print_r(scandir('/home/travis/build/stuajnht/YAMIS'));
 
 // Grab our autoloader
-require '../../vendor/autoload.php';
+require '/home/travis/build/stuajnht/YAMIS/vendor/autoload.php';
