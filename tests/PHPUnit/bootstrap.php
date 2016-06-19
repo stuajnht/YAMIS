@@ -17,5 +17,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+echo '../vendor';
+print_r(scandir('../vendor'));
+echo '../../vendor';
+print_r(scandir('../../vendor'));
+
 // Grab our autoloader
 require '../../vendor/autoload.php';
