@@ -7,5 +7,7 @@
             "email": "stuajnht@users.noreply.github.com"
         }
     ],
-    "require": {}
+    "require": {
+        "monolog/monolog": "1.0.*"
+    }
 }
