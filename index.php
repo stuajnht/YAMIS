@@ -25,6 +25,7 @@
     <body>
         <?php
         // put your code here
+        // Git should merge this file with the --no-ff option
         ?>
     </body>
 </html>
