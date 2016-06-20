@@ -1,6 +1,8 @@
 # YAMIS
 # Ignoring locally generated ApiGen development documentation files
 docs/dev/
+# Ignoring any generated config files
+config/
 
 # NetBeans
 # https://github.com/github/gitignore/blob/master/Global/NetBeans.gitignore
