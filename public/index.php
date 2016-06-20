@@ -39,28 +39,41 @@
  * By default, there will not be a config directory in the parent folder, which
  * means that no installation has yet taken place. Therefore, this script should
  * be stopped and the browser redirected to the install.php file instead
- * 
- * @access public
- * @author Jonathan Hart (stuajnht) <stuajnht@users.noreply.github.com>
- * @since 0.1.0
- * @version 1
- * 
- * @return bool Is this an initial installation
  */
-function isInitialInstallation() {
-    if (file_exists('../config')) {
-        return FALSE;
-    } else {
-        return TRUE;
-    }
-}
-
-// Checking if this is an initial installation
-if (isInitialInstallation()) {
+if (!file_exists('../config')) {
     die(<<<'EOT'
 Config directory missing, starting installation&hellip;
 EOT
-        );
+    );
+}
+
+/**
+ * We know that an YAMIS has already been installed onto this web server, so
+ * we can start the autoloader to gain access to any installed packages and
+ * namespaces
+ */
+require '../vendor/autoload.php';
+
+/**
+ * Loading the main Kernel
+ * 
+ * It's not being started fully yet, just using it to get the current version
+ * number of YAMIS to see if an upgrade should be performed
+ */
+$kernel = new YAMIS\Kernel();
+
+/**
+ * Seeing if an upgrade to YAMIS needs to be installed
+ * 
+ * Inside the config directory, there will be a file with the current YAMIS
+ * version as its file name (e.g. 0.1.0.lock). If this file is of a different
+ * number to the current YAMIS version, then an upgrade should be installed
+ */
+if (!file_exists('../config/' . $kernel->getVersion() . '.lock')) {
+    die(<<<'EOT'
+Upgrade needs to be performed&hellip;
+EOT
+    );
 }
 
 ?>
