@@ -28,17 +28,35 @@ use YAMIS\Kernel;
  * @access public
  * @author Jonathan Hart (stuajnht) <stuajnht@users.noreply.github.com>
  * @since 0.1.0
- * @version 1
+ * @version 2
  */
 class KernelTest extends \PHPUnit_Framework_TestCase {
+    /**
+     * Variable to hold an instance of the Kernel class
+     */
+    protected $kernel;
+    
+    public function setUp() {
+        $this->kernel = new Kernel();
+    }
+    
+    public function tearDown() {
+        $this->kernel = NULL;
+    }
+    
     /**
      * Checking the version of the codebase matches the currently testing version
      */
     public function testGetVersion() {
-        $kernel = new Kernel();
-
-        $kernelVersion = $kernel->getVersion();
+        $kernelVersion = $this->kernel->getVersion();
 
         $this->assertEquals($kernelVersion, '0.1.0');
+    }
+    
+    /**
+     * Making sure that the Kernel will initialise correctly
+     */
+    public function testKernelInit() {
+        $this->assertTrue($this->kernel->init());
     }
 }
