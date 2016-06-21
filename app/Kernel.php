@@ -47,6 +47,19 @@ class Kernel {
     private $version = '0.1.0';
     
     /**
+     * A key-value array of folder names and their absolute path
+     * 
+     * @access protected
+     * @author Jonathan Hart (stuajnht) <stuajnht@users.noreply.github.com>
+     * @since 0.1.0
+     * @see Kernel::initSetFolder()
+     * 
+     * @var array 
+     */
+    protected $folderPath = array();
+
+
+    /**
      * Gets the current version of YAMIS
      * 
      * This may not be the version that is currently installed, but rather the
@@ -71,11 +84,50 @@ class Kernel {
      * @access public
      * @author Jonathan Hart (stuajnht) <stuajnht@users.noreply.github.com>
      * @since 0.1.0
+     * @see Kernel::initSetFolder()
      * @version 1
      * 
      * @return bool Were all of the needed items initialised correctly
      */
     public function init() {
         return TRUE;
+    }
+    
+    /**
+     * Looks for and sets a full directory path of the passed folder
+     * 
+     * As a file may be called from any other file, the use of relative folder
+     * paths gets messy very quickly. This function starts in the current folder
+     * and moves up directories until it finds a matching folder with a name of
+     * that passed to the function. The full directory path is then saved to the
+     * $folderPath array
+     * 
+     * To prevent this function attempting to try forever, it is limited to 2
+     * parent folders
+     * 
+     * @access public
+     * @author Jonathan Hart (stuajnht) <stuajnht@users.noreply.github.com>
+     * @since 0.1.0
+     * @see Kernel::init()
+     * @version 1
+     * 
+     * @param string $folderName The name of the folder to look for
+     * @return boolean Has the requested folder been found
+     */
+    public function initSetFolder($folderName) {
+        $folderFound = FALSE;
+        $folderAttemptsRemaining = 2;
+
+        while (($folderAttemptsRemaining >= 0) && ($folderFound == FALSE)) {
+            if (file_exists($folderName)) {
+                $folderFound = TRUE;
+                $this->folderPath[$folderName] = realpath($folderName) . PHP_EOL;
+            } else {
+                $folderName = '../' . $folderName;
+                $folderAttemptsRemaining = $folderAttemptsRemaining - 1;
+            }
+        }
+        
+        return $folderFound;
     }
 }
