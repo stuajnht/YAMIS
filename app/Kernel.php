@@ -27,7 +27,7 @@ namespace YAMIS;
  * @access public
  * @author Jonathan Hart (stuajnht) <stuajnht@users.noreply.github.com>
  * @since 0.1.0
- * @version 1
+ * @version 2
  */
 class Kernel {
     /**
@@ -62,5 +62,20 @@ class Kernel {
      */
     public function getVersion() {
         return $this->version;
+    }
+    
+    /**
+     * Initialising variables and classes that may be needed throughout the
+     * running of YAMIS
+     * 
+     * @access public
+     * @author Jonathan Hart (stuajnht) <stuajnht@users.noreply.github.com>
+     * @since 0.1.0
+     * @version 1
+     * 
+     * @return bool Were all of the needed items initialised correctly
+     */
+    public function init() {
+        return TRUE;
     }
 }
