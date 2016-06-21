@@ -59,4 +59,20 @@ class KernelTest extends \PHPUnit_Framework_TestCase {
     public function testKernelInit() {
         $this->assertTrue($this->kernel->init());
     }
+    
+    /**
+     * Checking that all required folders are in the correct location and can
+     * be found
+     * 
+     * @dataProvider providerTestInitSetFolder
+     */
+    public function testInitSetFolder($folderName) {
+        $this->assertTrue($this->kernel->initSetFolder($folderName));
+    }
+    
+    public function providerTestInitSetFolder() {
+        return array(
+            array('app'),
+        );
+    }
 }
