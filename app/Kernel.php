@@ -110,21 +110,22 @@ class Kernel {
      * @since 0.1.0
      * @see Kernel::init()
      * @see Kernel::initGetFolder()
-     * @version 1
+     * @version 2
      * 
      * @param string $folderName The name of the folder to look for
      * @return boolean Has the requested folder been found
      */
     public function initSetFolder($folderName) {
+        $folderNameSearch = $folderName;
         $folderFound = FALSE;
         $folderAttemptsRemaining = 2;
 
         while (($folderAttemptsRemaining >= 0) && ($folderFound == FALSE)) {
-            if (file_exists($folderName)) {
+            if (file_exists($folderNameSearch)) {
                 $folderFound = TRUE;
-                $this->folderPath[$folderName] = realpath($folderName) . PHP_EOL;
+                $this->folderPath[$folderName] = realpath($folderNameSearch);
             } else {
-                $folderName = '../' . $folderName;
+                $folderNameSearch = '../' . $folderNameSearch;
                 $folderAttemptsRemaining = $folderAttemptsRemaining - 1;
             }
         }

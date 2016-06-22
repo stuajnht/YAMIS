@@ -37,13 +37,11 @@ class KernelTest extends \PHPUnit_Framework_TestCase {
     protected $kernel;
     
     public function setUp() {
-        if (!isset($this->kernel)) {
-            $this->kernel = new Kernel();
-        }
+        $this->kernel = new Kernel();
     }
     
     public function tearDown() {
-        //$this->kernel = NULL;
+        $this->kernel = NULL;
     }
     
     /**
@@ -89,11 +87,13 @@ class KernelTest extends \PHPUnit_Framework_TestCase {
      * @param string $expectedPath The expected path that should be returned
      */
     public function testInitGetFolder($folderName, $expectedPath) {
+        $this->kernel->initSetFolder($folderName);
+        
         $returnedPath = $this->kernel->initGetFolder($folderName);
         
         // Non-existant keys should return NULL
         if ($expectedPath === NULL) {
-            $this->assertEquals($expectedPath, $returnedPath);
+            $this->assertNull($returnedPath);
         } else {
             $this->assertEquals($expectedPath, $returnedPath);
         }
@@ -102,7 +102,11 @@ class KernelTest extends \PHPUnit_Framework_TestCase {
     public function providerTestInitGetFolder() {
         return array(
             array('not-here', NULL),
-            array('docs', "C:\\xampp\\htdocs\\YAMIS\\docs"),
+            // The ../app is needed here, as there's an app folder in the tests too
+            array('../app', realpath('../../app')),
+            array('docs', realpath('../../docs')),
+            array('public', realpath('../../public')),
+            array('vendor', realpath('../../vendor')),
         );
     }
 }
