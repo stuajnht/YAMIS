@@ -27,7 +27,7 @@ namespace YAMIS;
  * @access public
  * @author Jonathan Hart (stuajnht) <stuajnht@users.noreply.github.com>
  * @since 0.1.0
- * @version 2
+ * @version 3
  */
 class Kernel {
     /**
@@ -109,6 +109,7 @@ class Kernel {
      * @author Jonathan Hart (stuajnht) <stuajnht@users.noreply.github.com>
      * @since 0.1.0
      * @see Kernel::init()
+     * @see Kernel::initGetFolder()
      * @version 1
      * 
      * @param string $folderName The name of the folder to look for
@@ -129,5 +130,30 @@ class Kernel {
         }
         
         return $folderFound;
+    }
+    
+    /**
+     * Gets the full directory path of the passed folder
+     * 
+     * As a file may be called from any other file, the use of relative folder
+     * paths gets messy very quickly. This function returns the full directory
+     * path stored in the $folderPath array or a NULL if the folder was not found
+     * 
+     * @access public
+     * @author Jonathan Hart (stuajnht) <stuajnht@users.noreply.github.com>
+     * @since 0.1.0
+     * @see Kernel::init()
+     * @see Kernel::initSetFolder()
+     * @version 1
+     * 
+     * @param string $folderName The name of the folder to look for
+     * @return string The full path to the folder, or NULL if not found
+     */
+    public function initGetFolder($folderName) {
+        if (array_key_exists($folderName, $this->folderPath)) {
+            return $this->folderPath[$folderName];
+        } else {
+            return NULL;
+        }
     }
 }
