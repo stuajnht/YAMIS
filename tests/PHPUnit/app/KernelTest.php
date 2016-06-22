@@ -65,6 +65,7 @@ class KernelTest extends \PHPUnit_Framework_TestCase {
      * be found
      * 
      * @dataProvider providerTestInitSetFolder
+     * @todo Add additional values in the test provider once the folders have data in
      */
     public function testInitSetFolder($folderName) {
         $this->assertTrue($this->kernel->initSetFolder($folderName));
@@ -72,7 +73,7 @@ class KernelTest extends \PHPUnit_Framework_TestCase {
     
     public function providerTestInitSetFolder() {
         return array(
-            array('docs'),
+            array('public'),
         );
     }
     
@@ -82,6 +83,7 @@ class KernelTest extends \PHPUnit_Framework_TestCase {
      * 
      * @depends testInitSetFolder
      * @dataProvider providerTestInitGetFolder
+     * @todo Uncomment values in the test provider once the folders have data in
      * 
      * @param string $folderName The name of the folder to get the path of
      * @param string $expectedPath The expected path that should be returned
@@ -104,9 +106,9 @@ class KernelTest extends \PHPUnit_Framework_TestCase {
             array('not-here', NULL),
             // The ../app is needed here, as there's an app folder in the tests too
             array('../app', realpath('../../app')),
-            array('docs', realpath('../../docs')),
+            //array('docs', realpath('../../docs')),
             array('public', realpath('../../public')),
-            array('vendor', realpath('../../vendor')),
+            //array('vendor', realpath('../../vendor')),
         );
     }
 }
