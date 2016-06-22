@@ -28,7 +28,7 @@ use YAMIS\Kernel;
  * @access public
  * @author Jonathan Hart (stuajnht) <stuajnht@users.noreply.github.com>
  * @since 0.1.0
- * @version 2
+ * @version 3
  */
 class KernelTest extends \PHPUnit_Framework_TestCase {
     /**
@@ -37,11 +37,13 @@ class KernelTest extends \PHPUnit_Framework_TestCase {
     protected $kernel;
     
     public function setUp() {
-        $this->kernel = new Kernel();
+        if (!isset($this->kernel)) {
+            $this->kernel = new Kernel();
+        }
     }
     
     public function tearDown() {
-        $this->kernel = NULL;
+        //$this->kernel = NULL;
     }
     
     /**
@@ -72,7 +74,35 @@ class KernelTest extends \PHPUnit_Framework_TestCase {
     
     public function providerTestInitSetFolder() {
         return array(
-            array('app'),
+            array('docs'),
+        );
+    }
+    
+    /**
+     * Checking that all folders that can be found have the correct paths set,
+     * or for a NULL to be returned if the folder cannot be found
+     * 
+     * @depends testInitSetFolder
+     * @dataProvider providerTestInitGetFolder
+     * 
+     * @param string $folderName The name of the folder to get the path of
+     * @param string $expectedPath The expected path that should be returned
+     */
+    public function testInitGetFolder($folderName, $expectedPath) {
+        $returnedPath = $this->kernel->initGetFolder($folderName);
+        
+        // Non-existant keys should return NULL
+        if ($expectedPath === NULL) {
+            $this->assertEquals($expectedPath, $returnedPath);
+        } else {
+            $this->assertEquals($expectedPath, $returnedPath);
+        }
+    }
+    
+    public function providerTestInitGetFolder() {
+        return array(
+            array('not-here', NULL),
+            array('docs', "C:\\xampp\\htdocs\\YAMIS\\docs"),
         );
     }
 }
